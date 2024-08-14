@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="user.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="auth-form">
+      <input type="username" id="email" placeholder="username" /><br />
+      <input type="password" id="password" placeholder="password" /><br />
+      <button id="login">Login</button>
+    </form>
+    <script>
+      
+        document.body.style.backgroundImage = "url('image.jpg')";
+        document.getElementById("email").defaultValue = "atuny0"
+        document.getElementById("password").defaultValue = "9uQFF1Lh"
+      // atuny0
+      // 9uQFF1Lh
+      // event.preventDefault()
+
+      //function for creating and selecting elements
+      const createAndSelect = (method, value) => document[method](value);
+      // function for events
+      const eventListeners = (btn, type, functionName) =>
+        btn.addEventListener(type, functionName);
+
+      const loginBtn = document.querySelector("button");
+
+      function createApi(e) {
+        e.preventDefault();
+        const username = document.getElementById("email");
+        const password = document.getElementById("password");
+        console.log(username.value, password.value);
+
+        const userData = {
+            username: username,
+            password: password,
+        };
+        fetch("https://dummyjson.com/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+                username: username.value,
+                password: password.value,
+            }),
+            
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((res) => res.json())
+        .then((response) => 
+        // console.log(response));
+    (username.value === response.username)
+    ? (location.replace("/quizFinal.html"))
+    : (alert("Please enter correct username & password"))
+      )
+    }
+      eventListeners(loginBtn, "click", createApi);
+    </script>
+  </body>
+</html>
